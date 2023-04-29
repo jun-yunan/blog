@@ -36,6 +36,7 @@
     "handlebars": "^4.7.7",
     "lint-staged": "^13.2.2",
     "mongoose": "^7.1.0",
+    "mongoose-slug-generator": "^1.0.4",
     "node-sass": "^8.0.0",
     "prettier": "^2.8.8"
   },

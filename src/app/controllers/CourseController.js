@@ -14,5 +14,22 @@ class CourseController {
             .catch(next);
         
     }
+
+    create(req, res, next) {
+        res.render('courses/create')
+    }
+
+    // [POST] /courses/store
+    store(req, res, next) {
+        const formData = req.body
+        formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
+        // res.json(req.body)
+        const course = new Course(formData)
+        course.save()
+            .then(() => res.redirect('/'))
+            .catch(error => {
+                
+            })
+    }
 }
 module.exports = new CourseController();
