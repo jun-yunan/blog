@@ -10,7 +10,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Tên khoá học</th>
                 <th scope="col">Mô tả</th>
-                <th scope="col" colspan="2">Thời gian tạo</th>
+                <th scope="col" colspan="2">Thời gian xoá</th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +19,7 @@
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.description}}</td>
-                <td>{{this.createdAt}}</td>
+                <td>{{this.deletedAt}}</td>
                 <td><a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Khôi phục</a></td>
                 <td><a href="" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-course-modal" class="btn btn-link">Xoá vĩnh viễn</a></td>
             </tr>
