@@ -17,6 +17,18 @@ const Course = new Schema(
     }
 );
 
+// Custom query
+Course.query.sortable = function(req) {
+    if (req.query.hasOwnProperty('_sort')) {
+        const inValidtype = ['asc', 'desc'].includes(req.query.type)
+        return this.sort({
+            [req.query.column]: inValidtype ? req.query.type : 'desc',
+        })
+    }
+
+    return this
+}
+
 Course.plugin(mongooseDelete, { 
     deletedAt : true,
     overrideMethods: 'all',
