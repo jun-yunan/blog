@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
+const mongooseDelete = require('mongoose-delete');
 
 
 const Schema = mongoose.Schema;
@@ -14,6 +15,24 @@ const Product = new Schema({
 {
     timestamps: true
 })
+
+// Custom query
+Product.query.sortable = function(req) {
+    if (req.query.hasOwnProperty('_sort')) {
+        const inValidType = ['asc', 'desc'].includes(req.query.type)
+        return this.sort({
+            [req.query.column]: inValidType ? req.query.type : 'desc',
+        })
+    }
+
+    return this
+}
+
+// soft delete
+Product.plugin(mongooseDelete, { 
+    deletedAt : true,
+    overrideMethods: 'all',
+});
 
 // thêm slug động
 Product.pre('save', function (next) {

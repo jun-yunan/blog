@@ -1,0 +1,50 @@
+<div class="mt-4 wrapper-add-product">
+    <h3>Cập nhật thông tin sản phẩm</h3>
+    <form method="POST" action="/products/addProduct">
+        <div class="mb-3">
+            <label for="nameProduct" class="form-label">Tên sản phẩm</label>
+            <input name="nameProduct" type="text" value="{{product.nameProduct}}" class="form-control"
+                id="exampleInputEmail1">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Mô tả sản phẩm</label>
+            <textarea name="description" type="text" style="width: 80%; height: 200px;" class="form-control"
+                id="exampleInputEmail1">{{product.description}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Giá sản phẩm</label>
+            <input name="price" type="text" value="{{product.price}}" class="form-control myInput"
+                id="exampleInputEmail1">
+        </div>
+        <input type="text" hidden name="image" class="image-base64">
+        <button type="submit" class="btn btn-primary btn-edit">Lưu thay đổi</button>
+    </form>
+    <div class="mb-3">
+        <label for="image" class="form-label">Hình ảnh sản phẩm</label>
+        <input name="image" type="file" accept="image/*" class="form-control file-input" id="exampleInputEmail1">
+    </div>
+    <div class="preview-eidt">
+        <img class="preview-img-edit" src="{{product.image}}" alt="">
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.file-input').on('change', function (event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (event) {
+                $('.image-base64').attr('value', reader.result)
+                console.log(reader.result)
+                $('.preview-img-edit').attr('src', event.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        $('.myInput').mask('#,##0', {reverse: true});
+
+    });
+</script>

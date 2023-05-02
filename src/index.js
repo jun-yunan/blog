@@ -24,7 +24,7 @@ db.connect();
 
 app.use(cors());
 
-app.use('/src/uploads', express.static('uploads'))
+
 app.use(express.static(path.join(__dirname, 'public')))
 // app.use(express.static('uploads'));
 

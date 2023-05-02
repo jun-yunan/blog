@@ -36,3 +36,41 @@
     min-height: 250px;
     object-fit: cover;
 }
+
+// edit
+.btn-edit {
+    position: absolute;
+    top: 600px;
+}
+
+.preview-eidt {
+    position: absolute;
+    top: 45%;
+    left: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 290px;
+    height: 290px;
+    border-radius: 10px;
+    background-color: aqua;
+    overflow: hidden;
+}
+
+.preview-img-edit {
+    // position: absolute;
+    // top: 180px;
+    width: 250px;
+    min-height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+
+}
+
+// products
+
+.preview-products-img {
+    width: 100px;
+    max-width: 150px;
+    object-fit: cover;
+}
