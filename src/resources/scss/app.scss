@@ -8,3 +8,31 @@
     width: 160px;
     margin: 0 16px;
 }
+
+.wrapper-add-product {
+    position: relative;
+    height: 1000px;
+}
+
+.btn-submit{
+    position: absolute;
+    top: 400px;
+}
+.file-input {
+    width: 300px;
+}
+
+.preview{
+    position: absolute;
+    top: 300px;
+    left: 350px;
+    // width: 200px;
+    // height: auto;
+    // background-color: beige;
+}
+
+.preview-img {
+    width: 250px;
+    min-height: 250px;
+    object-fit: cover;
+}
