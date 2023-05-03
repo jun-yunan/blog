@@ -46,11 +46,7 @@ class ProductController {
     addProduct(req, res, next) {
         const product = new Product(req.body)
         product.save()
-            .then((data) => res.json({
-                status: 'success',
-                product: data,
-                request: req.body
-            }))
+            .then(() => res.redirect('/products/create'))
             .catch(next)
     }
 

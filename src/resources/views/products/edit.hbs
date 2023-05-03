@@ -1,6 +1,19 @@
 <div class="mt-4 wrapper-add-product">
     <h3>Cập nhật thông tin sản phẩm</h3>
-    <form method="POST" action="/products/addProduct">
+    <form method="POST" action="/products/{{product._id}}?_method=PUT">
+        <div class="mb-3">
+            <label for="nameProduct" class="form-label">Phân loại sản phẩm</label>
+            <select required name="type" class="form-select form-control-sm select-all-options"
+                aria-label="Default select example">
+                <option value="">-- Chọn loại hàng --</option>
+                <option value="phone">Điện thoại</option>
+                <option value="laptop">Laptop</option>
+                <option value="tablet">Máy tính bảng</option>
+                <option value="tivi">Tivi</option>
+                <option value="earphone">Tai nghe</option>
+                <option value="phone-components">Linh kiện điện thoại</option>
+            </select>
+        </div>
         <div class="mb-3">
             <label for="nameProduct" class="form-label">Tên sản phẩm</label>
             <input name="nameProduct" type="text" value="{{product.nameProduct}}" class="form-control"
@@ -27,7 +40,6 @@
         <img class="preview-img-edit" src="{{product.image}}" alt="">
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -44,7 +56,7 @@
             reader.readAsDataURL(file);
         });
 
-        $('.myInput').mask('#,##0', {reverse: true});
+        $('.myInput').mask('#,##0', { reverse: true });
 
     });
 </script>

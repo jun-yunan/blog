@@ -2,7 +2,7 @@
   margin-top: 16px; }
 
 .select-all-options {
-  width: 160px;
+  width: 200px;
   margin: 0 16px; }
 
 .wrapper-add-product {
@@ -11,14 +11,14 @@
 
 .btn-submit {
   position: absolute;
-  top: 400px; }
+  top: 500px; }
 
 .file-input {
   width: 300px; }
 
 .preview {
   position: absolute;
-  top: 300px;
+  top: 400px;
   left: 350px; }
 
 .preview-img {
@@ -28,11 +28,11 @@
 
 .btn-edit {
   position: absolute;
-  top: 600px; }
+  top: 650px; }
 
 .preview-eidt {
   position: absolute;
-  top: 45%;
+  top: 55%;
   left: 35%;
   display: flex;
   align-items: center;

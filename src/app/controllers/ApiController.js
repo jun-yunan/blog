@@ -16,16 +16,31 @@ class ApiController {
     }
 
     async getProductAll(req, res, next) {
-        await Product.findOne({ nameProduct: 'Kiến Thức Nhập Môn IT 75' })
-        .then(result => {
+        await Product.find({})
+        .then(products => {
             res.json({
                 status: 'successfully!!',
-                data: result
+                data: products
             });
         })
         .catch(err => {
             throw err;
         });
+    }
+
+    //[GET] /api/products/get
+    async get(req, res, next) {
+        await Product.find({type: req.query.typeProduct})
+            .then(products => {
+                res.json({
+                    query: req.query,
+                    status: 'successfully!!',
+                    data: products
+                });
+            })
+            .catch(err => {
+                throw err;
+            });
     }
 }
 

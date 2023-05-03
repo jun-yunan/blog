@@ -2,6 +2,18 @@
     <h3>Thêm sản phẩm</h3>
     <form method="POST" action="/products/addProduct">
         <div class="mb-3">
+            <label for="nameProduct" class="form-label">Phân loại sản phẩm</label>
+            <select required name="type" class="form-select form-control-sm select-all-options" aria-label="Default select example">
+                <option value="">-- Chọn loại hàng --</option>
+                <option value="phone">Điện thoại</option>
+                <option value="laptop">Laptop</option>
+                <option value="tablet">Máy tính bảng</option>
+                <option value="tivi">Tivi</option>
+                <option value="earphone">Tai nghe</option>
+                <option value="phone-components">Linh kiện điện thoại</option>
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="nameProduct" class="form-label">Tên sản phẩm</label>
             <input name="nameProduct" type="text" class="form-control" id="exampleInputEmail1">
         </div>
@@ -11,10 +23,10 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Giá sản phẩm</label>
-            <input name="price" type="number" class="form-control" id="exampleInputEmail1">
+            <input name="price" type="text" class="form-control myInput" id="exampleInputEmail1">
         </div>
         <input type="text" hidden name="image" class="image-base64">
-        <button type="submit" class="btn btn-primary btn-submit">Thêm khoá học</button>
+        <button type="submit" class="btn btn-primary btn-submit">Thêm sản phẩm</button>
     </form>
     <div class="mb-3">
         <label for="image" class="form-label">Hình ảnh sản phẩm</label>
@@ -39,5 +51,7 @@
 
             reader.readAsDataURL(file);
         });
+
+        $('.myInput').mask('#,##0', { reverse: true });
     });
 </script>

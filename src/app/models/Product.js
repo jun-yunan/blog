@@ -10,6 +10,7 @@ const Product = new Schema({
     description: {type: String},
     price: {type: String},
     image: {type: String},
+    type: {type: String},
     slug: { type: String, unique: true },
 },
 {
@@ -37,7 +38,7 @@ Product.plugin(mongooseDelete, {
 // thêm slug động
 Product.pre('save', function (next) {
     if (this.isModified('nameProduct')) { // Kiểm tra nếu trường name được cập nhật
-        this.slug = slugify(this.nameProduct, { lower: true, strict: true, replacement: '-', trim: true });
+        this.slug = slugify(this.nameProduct + '-' + Math.random().toString(36).substr(2, 6), { lower: true, strict: true, replacement: '-', trim: true });
     }
     next();
 });
@@ -45,7 +46,7 @@ Product.pre('save', function (next) {
 Product.pre('updateOne', function (next) {
     const update = this.getUpdate();
     if (update.nameProduct) { // Kiểm tra nếu trường name được cập nhật
-        update.slug = slugify(update.nameProduct, { lower: true, strict: true, replacement: '-', trim: true });
+        update.slug = slugify(update.nameProduct + '-' + Math.random().toString(36).substr(2, 6), { lower: true, strict: true, replacement: '-', trim: true });
     }
     next();
 });
