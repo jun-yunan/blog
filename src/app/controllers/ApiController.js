@@ -42,6 +42,20 @@ class ApiController {
                 throw err;
             });
     }
+
+    //[GET] /api/products/getById 
+    async getById(req, res, next) {
+        await Product.findOne({_id: req.query.idProduct})
+            .then((product) => {
+                res.json({
+                    query: req.query,
+                    status: 'successfully',
+                    data: product
+                })
+            })
+
+            .catch(next)
+    }
 }
 
 module.exports = new ApiController()
