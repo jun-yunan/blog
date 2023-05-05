@@ -1,0 +1,154 @@
+<form name='container-form' method='POST' action='/users/handle-form-actions' class='mt-4'>
+    <div>
+        <h3>Quản lý tài khoản</h3>
+        <a href='/me/trash/users'>Thùng rác ({{deletedCount}})</a>
+        <div class='mt-4 d-flex align-items-center'>
+            <div class='form-check'>
+                <input class='form-check-input' type='checkbox' value='' id='checkbox-all' />
+                <label class='form-check-label' for='checkbox-all'>
+                    Chọn tất cả
+                </label>
+            </div>
+
+            <select required name='action' class='form-select form-control-sm select-all-options'
+                aria-label='Default select example'>
+                <option value=''>-- hành động --</option>
+                <option value='delete'>Xoá</option>
+            </select>
+
+            <button class='btn btn-primary check-all-submit-btn btn-sm' disabled>Thực hiện</button>
+        </div>
+    </div>
+
+    <table class='table mt-4'>
+        <thead>
+            <tr>
+                <th scope='col'></th>
+                <th scope='col'>ID</th>
+                <th scope='col'>username</th>
+                <th scope='col'>Mật khẩu</th>
+                <th scope='col'>Email</th>
+                <th scope='col'>Họ và tên</th>
+                <th scope='col'>Ảnh đại diện</th>
+                <th scope='col'>Giới tính</th>
+                <th scope='col'>Ngày sinh</th>
+                <th scope='col'>Số điện thoại</th>
+                <th scope='col'>Địa chỉ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr class="wrapper-info-user">
+                <td>
+                    <div class='form-check'>
+                        <input class='form-check-input' type='checkbox' name='userIds[]' value='{{this._id}}' />
+                    </div>
+                </td>
+                <th scope='row'>{{sum @index 1}}</th>
+                <td class="username">{{this.username}}</td>
+                <td class="password">{{this.password}}</td>
+                <td class="email">{{this.email}}</td>
+                <td class="fullName">{{this.fullName}}</td>
+                <td class="avatar-stored"><img class="preview-products-img" src="{{this.avatar}}"
+                        alt="{{this.fullName}}">
+                </td>
+                <td class="gender">{{this.gender}}</td>
+                <td class="date">{{this.date}}</td>
+                <td class="numberPhone">{{this.numberPhone}}</td>
+                <td class="address">{{this.address}}</td>
+                <td><a href='/users/{{this._id}}/edit' class='btn btn-link'>Sửa</a></td>
+                <td><a href='' data-bs-toggle='modal' data-id='{{this._id}}' data-bs-target='#delete-course-modal'
+                        class='btn btn-link'>Xoá</a></td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan='5' class='text-center'>
+                    Bạn chưa có sản phẩm nào.
+                    <a href='/users/create-account'>Thêm tài khoản</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</form>
+
+{{! Confirm delete }}
+
+<div id='delete-course-modal' class='modal' tabindex='-1'>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title'>Xoá tài khoản học?</h5>
+                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+            </div>
+            <div class='modal-body'>
+                <p>Bạn chắc chắn muốn xoá tài khoản này?</p>
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Huỷ</button>
+                <button id='btn-delete-course' type='button' class='btn btn-danger'>Xoá bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{! delete hidden form }}
+<form name='delete-form' method='POST'></form>
+
+<script>
+    $(document).ready(function () {
+        var checkboxAll = $('#checkbox-all')
+        var courseItemCheckbox = $('input[name="userIds[]"]')
+        var checkAllSubmitBtn = $('.check-all-submit-btn')
+        //var containerForm = document.forms['container-form']
+        var containerForm = $('form[name="container-form"]')
+
+        checkboxAll.change(function (e) {
+            var isCheckedAll = $(this).prop('checked')
+            //courseItemCheckbox.prop('checked', isCheckedAll)
+
+            if (isCheckedAll) {
+                courseItemCheckbox.prop('checked', true)
+            }
+            else {
+                courseItemCheckbox.prop('checked', false)
+            }
+            renderCheckAllSubmitBtn()
+        })
+
+        courseItemCheckbox.change(function () {
+            var isCheckedAll = courseItemCheckbox.length === $('input[name="userIds[]"]:checked').length
+            checkboxAll.prop('checked', isCheckedAll)
+            renderCheckAllSubmitBtn()
+        })
+
+        function renderCheckAllSubmitBtn() {
+            var checkedCount = $('input[name="userIds[]"]:checked').length
+            if (checkedCount > 0) {
+                checkAllSubmitBtn.attr('disabled', false)
+            }
+            else {
+                checkAllSubmitBtn.attr('disabled', true)
+            }
+        }
+    })
+</script>
+
+<script>
+    const exampleModal = document.getElementById('delete-course-modal')
+    var userId;
+    var deleteForm = document.forms['delete-form']
+    var btnDeleteCourse = document.getElementById('btn-delete-course')
+
+    if (exampleModal) {
+        exampleModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget
+            userId = button.getAttribute('data-id')
+        })
+    }
+
+    btnDeleteCourse.onclick = function () {
+        deleteForm.action = '/users/' + userId + '?_method=DELETE'
+        deleteForm.submit()
+    }
+</script>

@@ -1,31 +1,38 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">Trang Admin</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+<nav class='navbar navbar-expand-lg bg-body-tertiary'>
+    <div class='container-fluid'>
+        <a class='navbar-brand' href='/'>Trang Admin</a>
+        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent'
+            aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+            <span class='navbar-toggler-icon'></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+        <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+            <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
+                <li class='nav-item dropdown'>
+                    <a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown'
+                        aria-expanded='false'>
                         Dropdown
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/courses/create">Đăng khoá học</a></li>
-                        <li><a class="dropdown-item" href="/products/create">Thêm sản phẩm</a></li>
+                    <ul class='dropdown-menu'>
+                        <li><a class='dropdown-item' href='/courses/create'>Đăng khoá học</a></li>
+                        <li><a class='dropdown-item' href='/products/create'>Thêm sản phẩm</a></li>
+                        <li><a class='dropdown-item' href='/users/create'>Tạo tài khoản</a></li>
                         <li>
-                            <hr class="dropdown-divider">
+                            <hr class='dropdown-divider' />
                         </li>
-                        <li><a class="dropdown-item" href="/me/stored/courses">Khoá học của tôi</a></li>
-                        <li><a class="dropdown-item" href="/me/stored/products">Sản phẩm của tôi</a></li>
-                        <li><a class="dropdown-item" href="/me/stored/news">Bài viết của tôi</a></li>
+                        <li><a class='dropdown-item' href='/me/stored/users'>Quản lý tài khoản người dùng</a></li>
+                        <li><a class='dropdown-item' href='/me/stored/courses'>Khoá học của tôi</a></li>
+                        <li><a class='dropdown-item' href='/me/stored/products'>Sản phẩm của tôi</a></li>
+                        <li><a class='dropdown-item' href='/me/stored/news'>Bài viết của tôi</a></li>
                         <li>
-                            <hr class="dropdown-divider">
+                            <hr class='dropdown-divider' />
                         </li>
-                        <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                        <li><a class='dropdown-item' href='/users/logout'>Đăng xuất</a></li>
                     </ul>
+                </li>
+                <li class='nav-item dropdown'><a href='/users/sign-in' class='btn btn-primary btn-lg' tabindex='-1'
+                        role='button' aria-disabled='true'>Đăng nhập</a>
+                    <a href='/users/create-account' class='btn btn-secondary btn-lg' tabindex='-1' role='button'
+                        aria-disabled='true'>Đăng ký</a>
                 </li>
             </ul>
         </div>

@@ -14,7 +14,7 @@
     height: 1000px;
 }
 
-.btn-submit{
+.btn-submit {
     position: absolute;
     top: 500px;
 }
@@ -22,7 +22,7 @@
     width: 300px;
 }
 
-.preview{
+.preview {
     position: absolute;
     top: 400px;
     left: 350px;
@@ -64,7 +64,6 @@
     min-height: 250px;
     object-fit: cover;
     border-radius: 10px;
-
 }
 
 // products
@@ -73,4 +72,107 @@
     width: 100px;
     max-width: 150px;
     object-fit: cover;
+}
+
+// user
+.wrapper {
+    position: relative;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.wrapper-info-user td {
+    font-size: 15px;
+    font-weight: 600;
+}
+.username {
+    max-width: 50px;
+}
+.password {
+    max-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.email {
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fullName {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.avatar {
+}
+
+.gender {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.date {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.numberPhone {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.address {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mb-3 input {
+    max-width: 500px;
+}
+
+.avatar {
+    position: absolute;
+    right: 15%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background-color: #add8e6;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border: 5px solid #fff;
+}
+
+.image-avatar {
+    width: 100px;
+    min-height: 100px;
+}
+
+.avatar-stored {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
 }

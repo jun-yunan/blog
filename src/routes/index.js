@@ -1,27 +1,24 @@
-const newsRouter = require('./news')
-const meRouter = require('./me')
-const coursesRouter = require('./courses')
-const siteRouter = require('./site')
-const apiRouter = require('./api')
-const productRouter = require('./products')
-
+const newsRouter = require('./news');
+const meRouter = require('./me');
+const coursesRouter = require('./courses');
+const siteRouter = require('./site');
+const apiRouter = require('./api');
+const productRouter = require('./products');
+const userRouter = require('./users');
 
 function route(app) {
-    app.use('/news', newsRouter)
-    app.use('/me', meRouter)
+    app.use('/users', userRouter);
 
-    app.use('/courses', coursesRouter)
+    app.use('/news', newsRouter);
+    app.use('/me', meRouter);
 
-    app.use('/products', productRouter)
+    app.use('/courses', coursesRouter);
 
-    app.use('/api', apiRouter)
+    app.use('/products', productRouter);
 
+    app.use('/api', apiRouter);
 
-    app.use('/', siteRouter)
-
-    
-    
+    app.use('/', siteRouter);
 }
 
 module.exports = route;
-

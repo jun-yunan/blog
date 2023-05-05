@@ -9,8 +9,9 @@
                     Chọn tất cả
                 </label>
             </div>
-    
-            <select required name="action" class="form-select form-control-sm select-all-options" aria-label="Default select example">
+
+            <select required name="action" class="form-select form-control-sm select-all-options"
+                aria-label="Default select example">
                 <option value="">-- hành động --</option>
                 <option value="delete">Xoá</option>
             </select>
@@ -44,7 +45,8 @@
                 <td>{{this.price}} VND</td>
                 <td><img class="preview-products-img" src="{{this.image}}" alt="{{this.nameProduct}}"></td>
                 <td><a href="/products/{{this._id}}/edit" class="btn btn-link">Sửa</a></td>
-                <td><a href="" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-course-modal" class="btn btn-link">Xoá</a></td>
+                <td><a href="" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-course-modal"
+                        class="btn btn-link">Xoá</a></td>
             </tr>
             {{else}}
             <tr>
@@ -82,18 +84,18 @@
 <form name="delete-form" method="POST"></form>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var checkboxAll = $('#checkbox-all')
         var courseItemCheckbox = $('input[name="productIds[]"]')
         var checkAllSubmitBtn = $('.check-all-submit-btn')
         //var containerForm = document.forms['container-form']
         var containerForm = $('form[name="container-form"]')
 
-        checkboxAll.change(function(e) {
+        checkboxAll.change(function (e) {
             var isCheckedAll = $(this).prop('checked')
             //courseItemCheckbox.prop('checked', isCheckedAll)
 
-            if (isCheckedAll){
+            if (isCheckedAll) {
                 courseItemCheckbox.prop('checked', true)
             }
             else {
@@ -102,7 +104,7 @@
             renderCheckAllSubmitBtn()
         })
 
-        courseItemCheckbox.change(function() {
+        courseItemCheckbox.change(function () {
             var isCheckedAll = courseItemCheckbox.length === $('input[name="productIds[]"]:checked').length
             checkboxAll.prop('checked', isCheckedAll)
             renderCheckAllSubmitBtn()
@@ -133,7 +135,7 @@
         })
     }
 
-    btnDeleteCourse.onclick = function() {
+    btnDeleteCourse.onclick = function () {
         deleteForm.action = '/products/' + productId + '?_method=DELETE'
         deleteForm.submit()
     }

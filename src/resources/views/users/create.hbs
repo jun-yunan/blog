@@ -1,0 +1,89 @@
+<div class='mt-4 wrapper-add-product'>
+    <h3>Đăng ký</h3>
+    <form method='POST' action='/users/sign-up' class="wrapper">
+
+        <div class='mb-3'>
+            <label for='username' class='form-label'>Tên toài khoản</label>
+            <input name='username' type='text' class='form-control' />
+        </div>
+
+        <div class='mb-3'>
+            <label for='email' class='form-label'>Email</label>
+            <input name='email' type='email' class='form-control' />
+        </div>
+
+        <div class='mb-3'>
+            <label for='password' class='form-label'>Mật khẩu</label>
+            <input name='password' type='password' class='form-control' />
+        </div>
+
+        <div class='mb-3'>
+            <label for='password' class='form-label'>Xác nhận mật khẩu</label>
+            <input type='password' class='form-control' />
+        </div>
+
+
+        <div class='mb-3'>
+            <label for='fullName' class='form-label'>Họ và tên</label>
+            <input name='fullName' type='text' class='form-control' />
+        </div>
+
+        <input type="text" hidden name="avatar" class="image-base64">
+        <div class="mb-3">
+            <label for="image" class="form-label">Hình ảnh sản phẩm</label>
+            <input type="file" accept="image/*" class="form-control file-input" id="exampleInputEmail1">
+        </div>
+        <div class="avatar">
+            <img class="image-avatar" src="" alt="">
+        </div>
+
+        <div class='mb-3'>
+            <select required name="gender" class="form-select form-control-sm select-all-options"
+                aria-label="Default select example">
+                <option value="">-- Giới tính --</option>
+                <option value="male">Nam</option>
+                <option value="female">Nữ</option>
+                <option value="other">Khác</option>
+            </select>
+        </div>
+
+        <div class='mb-3'>
+            <label for='date' class='form-label'>Ngày sinh</label>
+            <input name='date' type='date' class='form-control' />
+        </div>
+
+        <div class='mb-3'>
+            <label for='numberPhone' class='form-label'>Số điện thoại</label>
+            <input name='numberPhone' type='text' class='form-control' />
+        </div>
+
+        <div class='mb-3'>
+            <label for='address' class='form-label'>Địa chỉ</label>
+            <input name='address' type='text' class='form-control' />
+        </div>
+
+
+        <button type='submit' class='btn btn-primary'>Đăng ký</button>
+
+    </form>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.file-input').on('change', function (event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (event) {
+                $('.image-base64').attr('value', reader.result)
+                console.log(reader.result)
+                $('.image-avatar').attr('src', event.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        $('.myInput').mask('#,##0', { reverse: true });
+    });
+</script>
