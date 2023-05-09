@@ -12,7 +12,7 @@ class UserController {
     }
 
     // [POST] /users/login
-    async login(req, res, next) {
+    login(req, res, next) {
         const username = req.username;
 
         const user = { username };

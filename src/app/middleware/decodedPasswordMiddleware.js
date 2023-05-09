@@ -7,7 +7,8 @@ const decodedPasswordMiddleware = async (req, res, next) => {
 
     if (!userInfo) {
         return res.json({
-            status: 'Không tìm thấy tài khoản',
+            status: false,
+            message: 'Không tìm thấy tài khoản',
         });
     }
 
@@ -18,7 +19,8 @@ const decodedPasswordMiddleware = async (req, res, next) => {
         next();
     } else {
         return res.json({
-            status: 'Sai mật khẩu',
+            status: false,
+            message: 'Sai mật khẩu',
         });
     }
 };
