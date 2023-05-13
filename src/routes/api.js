@@ -15,5 +15,7 @@ router.get('/products/getById', apiController.getById);
 router.post('/users/checkLogin', decodedPasswordMiddleware, apiController.checkLogin);
 router.post('/users/createAccount', apiController.createAccount);
 router.get('/users/getAllUser', apiController.getAllUser);
+router.get('/users/getUser', apiController.getUser);
+router.post('/users/post/update', apiController.update);
 
 module.exports = router;

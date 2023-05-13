@@ -80,14 +80,34 @@ class ApiController {
             });
     }
 
+    // [GET] /api/users/getUser
+    async getUser(req, res, next) {
+        User.findOne({ username: req.query.username })
+            .then((user) =>
+                res.json({
+                    message: 'Get User Successfully!!!',
+                    status: true,
+                    data: user,
+                }),
+            )
+            .catch((error) =>
+                res.json({
+                    message: 'Get User Fail!!!',
+                    status: false,
+                    error,
+                }),
+            );
+    }
+
     //[POST] /api/users/checkLogin
-    checkLogin(req, res, next) {
+    async checkLogin(req, res, next) {
         try {
             const username = req.username;
             const user = { username };
             const token = jwt.sign(user, secretKey, { expiresIn: '1d' });
             const nameCookie = 'token';
             const valueCookie = token;
+
             res.json({
                 status: true,
                 message: 'Check Login successfully',
@@ -145,6 +165,26 @@ class ApiController {
                     status: false,
                     message: 'Tạo tài khoản không thành công',
                     err,
+                });
+            });
+    }
+
+    // [POST] /user/post/update
+    async update(req, res, next) {
+        // res.json({ status: true, message: 'successfully!', result: req.body });
+
+        await User.updateOne({ _id: req.body._id }, req.body)
+            .then(() =>
+                res.json({
+                    status: true,
+                    message: 'Update Info User Successfully!!!',
+                }),
+            )
+            .catch((error) => {
+                res.json({
+                    status: false,
+                    message: 'Update Info User Fail!!!',
+                    error,
                 });
             });
     }
