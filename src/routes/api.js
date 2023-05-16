@@ -18,4 +18,7 @@ router.get('/users/getAllUser', apiController.getAllUser);
 router.get('/users/getUser', apiController.getUser);
 router.post('/users/post/update', apiController.update);
 
+// carts
+router.post('/carts/post/addToCart', apiController.addToCart);
+
 module.exports = router;

@@ -1,6 +1,7 @@
 const Course = require('../models/Course');
 const Product = require('../models/Product');
 const User = require('../models/User');
+const Cart = require('../models/Cart');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -187,6 +188,49 @@ class ApiController {
                     error,
                 });
             });
+    }
+
+    // CARTS
+
+    //[POST] /carts/post/addToCart
+    async addToCart(req, res, next) {
+        try {
+            const { userId, productId, username, nameProduct, quantity } = req.body;
+
+            const cart = await Cart.findOne({ userId });
+
+            if (!cart) {
+                const newCart = await Cart.create({
+                    userId,
+                    items: [{ productId, quantity, nameProduct }],
+                    username,
+                });
+                return res.json({
+                    resultNewCart: newCart,
+                    status: true,
+                    message: 'Add to Cart Successfully!!!',
+                });
+            }
+
+            const existingItem = cart.items.find(
+                (item) => item.productId.toString() === productId.toString(),
+            );
+
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.items.push({ productId, quantity, nameProduct });
+            }
+
+            const updatedCart = await cart.save();
+            return res.json({
+                resultUpdateCart: updatedCart,
+                status: true,
+                message: 'Add to Cart Successfully!!!',
+            });
+        } catch (error) {
+            return res.status(500).json({ error, status: false, message: 'Add to Cart Fail!!!' });
+        }
     }
 }
 
