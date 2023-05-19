@@ -19,6 +19,11 @@ router.get('/users/getUser', apiController.getUser);
 router.post('/users/post/update', apiController.update);
 
 // carts
-router.post('/carts/post/addToCart', apiController.addToCart);
+router.post('/carts/addToCart', apiController.addToCart);
+router.get('/carts/productInCart', apiController.productInCart);
+router.post('/carts/decreaseQuantity', apiController.decreaseQuantity);
+router.post('/carts/increaseQuantity', apiController.increaseQuantity);
+router.post('/carts/deleteProduct', apiController.deleteProduct);
+// router.post('/carts/totalPrice', apiController.totalPrice);
 
 module.exports = router;

@@ -232,6 +232,183 @@ class ApiController {
             return res.status(500).json({ error, status: false, message: 'Add to Cart Fail!!!' });
         }
     }
+
+    //[GET] /carts/get/productInCart
+    async productInCart(req, res, next) {
+        try {
+            const { userId } = req.query;
+            const cart = await Cart.findOne({ userId });
+
+            const findIdProduct = cart.items.map((item) => item.productId);
+
+            const productQuantities = {};
+            cart.items.forEach((item) => {
+                if (!productQuantities[item.productId]) {
+                    productQuantities[item.productId] = item.quantity;
+                } else {
+                    productQuantities[item.productId] += item.quantity;
+                }
+            });
+
+            const listProduct = await Product.find({ _id: { $in: findIdProduct } });
+
+            const listProductWithQuantity = listProduct.map((product) => ({
+                ...product.toObject(),
+                quantity: productQuantities[product._id] || 0,
+                isChecked: false,
+            }));
+
+            res.json({
+                listProduct: listProductWithQuantity,
+                message: 'Get Product In Cart Successfully!!!',
+                status: true,
+            });
+        } catch (error) {
+            res.json({
+                error,
+                message: 'Get Product In Cart Fail!!!',
+                status: false,
+            });
+        }
+    }
+
+    //[POST] /carts/decreaseQuantity
+    async decreaseQuantity(req, res, next) {
+        try {
+            const { userId, productId } = req.body;
+
+            const cart = await Cart.findOne({ userId });
+            if (!cart) {
+                return next();
+            }
+
+            const existingItem = cart.items.find(
+                (item) => item.productId.toString() === productId.toString(),
+            );
+
+            if (!existingItem) {
+                return next();
+            }
+
+            existingItem.quantity -= 1;
+
+            const newCart = await cart.save();
+            res.json({
+                message: 'decrease',
+                request: req.body,
+                existingItem,
+                newCart,
+                quantityUpdated: existingItem.quantity,
+            });
+            return next();
+        } catch (error) {
+            res.json({
+                error,
+                status: false,
+                message: 'Fail!!!',
+            });
+        }
+    }
+
+    //[POST] /carts/increaseQuantity
+    async increaseQuantity(req, res, next) {
+        try {
+            const { userId, productId } = req.body;
+
+            const cart = await Cart.findOne({ userId });
+            if (!cart) {
+                return next();
+            }
+
+            const existingItem = cart.items.find(
+                (item) => item.productId.toString() === productId.toString(),
+            );
+
+            if (!existingItem) {
+                return next();
+            }
+
+            existingItem.quantity += 1;
+
+            const newCart = await cart.save();
+            res.json({
+                message: 'decrease',
+                request: req.body,
+                existingItem,
+                newCart,
+                quantityUpdated: existingItem.quantity,
+            });
+            return next();
+        } catch (error) {
+            res.json({
+                error,
+                status: false,
+                message: 'Fail!!!',
+            });
+        }
+    }
+
+    //[POST] /carts/deleteProduct
+    async deleteProduct(req, res, next) {
+        try {
+            const { userId, productId } = req.body;
+
+            const cart = await Cart.findOne({ userId });
+
+            if (!cart) {
+                return next();
+            }
+
+            const cartDeleted = cart.items.filter((product) => {
+                // if (product.productId.toString() === productId.toString()) {
+                //     return false;
+                // }
+                // return true;
+                return product.productId.toString() !== productId.toString();
+            });
+
+            cart.items = cartDeleted;
+            const newCart = await cart.save();
+
+            res.json({
+                newCart,
+                status: true,
+                message: 'Delete Successfully!!!',
+            });
+            return next();
+        } catch (error) {
+            res.json({ status: false, message: 'Delete Fail!!!', error });
+        }
+    }
+
+    //[POST] /carts/totalPrice
+    // async totalPrice(req, res, next) {
+    //     try {
+    //         const { userId, productId } = req.body;
+
+    //         const cart = await Cart.findOne({ userId });
+
+    //         if (!cart) return next();
+
+    //         const getPrice = await Product.findOne({ _id: productId }, { _id: 0, price: 1 });
+    //         const existingItem = cart.items.find(
+    //             (item) => item.productId.toString() === productId.toString(),
+    //         );
+
+    //         const { price } = getPrice;
+
+    //         res.json({
+    //             productId,
+    //             price,
+    //             status: true,
+    //             message: 'Successfully',
+    //             quantity: existingItem.quantity,
+    //         });
+    //         return next();
+    //     } catch (error) {
+    //         res.json({ error, message: 'error', status: false });
+    //     }
+    // }
 }
 
 module.exports = new ApiController();
