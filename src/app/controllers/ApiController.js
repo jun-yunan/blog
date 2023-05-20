@@ -295,10 +295,9 @@ class ApiController {
             const newCart = await cart.save();
             res.json({
                 message: 'decrease',
-                request: req.body,
-                existingItem,
-                newCart,
-                quantityUpdated: existingItem.quantity,
+                productId,
+                quantity: existingItem.quantity,
+                status: true,
             });
             return next();
         } catch (error) {
@@ -331,12 +330,12 @@ class ApiController {
             existingItem.quantity += 1;
 
             const newCart = await cart.save();
+
             res.json({
-                message: 'decrease',
-                request: req.body,
-                existingItem,
-                newCart,
-                quantityUpdated: existingItem.quantity,
+                status: true,
+                message: 'increase',
+                quantity: existingItem.quantity,
+                productId,
             });
             return next();
         } catch (error) {
@@ -372,6 +371,7 @@ class ApiController {
 
             res.json({
                 newCart,
+                productId,
                 status: true,
                 message: 'Delete Successfully!!!',
             });
