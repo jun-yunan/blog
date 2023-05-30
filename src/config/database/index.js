@@ -9,11 +9,10 @@ async function connect() {
             useUnifiedTopology: true,
         });
         console.log(`Connect database ${databaseConfig.dbName} successfully!!!`);
-    }
-    catch (error) {
+    } catch (error) {
         console.log(`Connect database ${databaseConfig.dbName} failure!!!`);
         console.log(error);
     }
 }
 
-module.exports = { connect }
+module.exports = { connect };
