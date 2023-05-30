@@ -12,7 +12,7 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 
-const port = process.env.PORT;
+// const port = process.env.PORT;
 const SortMiddleware = require('./app/middleware/sortMiddleware');
 
 const route = require('./routes');
@@ -44,5 +44,5 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 
 // route init
 route(app);
-
-app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
