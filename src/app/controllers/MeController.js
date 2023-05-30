@@ -58,10 +58,22 @@ class MeController {
         //         })
         //     })
         //     .catch(next)
-        Promise.all([Product.find({}).sortable(req), Product.countDocumentsDeleted()])
-            .then(([products, deletedCount]) =>
+
+        // ---------------
+        // Promise.all([Product.find({}).sortable(req), Product.countDocumentsDeleted()])
+        //     .then(([products, deletedCount]) =>
+        //         res.render('me/stored-products', {
+        //             deletedCount,
+        //             products: mutipleMongooseToObject(products),
+        //         }),
+        //     )
+        //     .catch(next);
+
+        Product.find({})
+            .sortable(req)
+            .then((products) =>
                 res.render('me/stored-products', {
-                    deletedCount,
+                    // deletedCount,
                     products: mutipleMongooseToObject(products),
                 }),
             )
@@ -69,10 +81,19 @@ class MeController {
     }
 
     storedUsers(req, res, next) {
-        Promise.all([User.find({}).sortable(req), User.countDocumentsDeleted()])
-            .then(([users, deletedCount]) =>
+        // Promise.all([User.find({}).sortable(req), User.countDocumentsDeleted()])
+        //     .then(([users, deletedCount]) =>
+        //         res.render('me/stored-users', {
+        //             deletedCount,
+        //             users: mutipleMongooseToObject(users),
+        //         }),
+        //     )
+        //     .catch(next);
+        User.find({})
+            .sortable(req)
+            .then((users) =>
                 res.render('me/stored-users', {
-                    deletedCount,
+                    // deletedCount,
                     users: mutipleMongooseToObject(users),
                 }),
             )

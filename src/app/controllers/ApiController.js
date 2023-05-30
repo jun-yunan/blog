@@ -409,6 +409,38 @@ class ApiController {
     //         res.json({ error, message: 'error', status: false });
     //     }
     // }
+
+    // [GET] /carts/searchProduct
+    async searchProduct(req, res, next) {
+        try {
+            const { searchValue } = req.body;
+            const result = await Product.find(
+                {
+                    nameProduct: { $regex: searchValue, $options: 'i' },
+                },
+                { nameProduct: 1, price: 1, image: 1 },
+            );
+            res.json({ searchValue, message: 'Successfully', result, status: true });
+        } catch (error) {
+            res.json({ error, status: false, message: 'Fail!!!', request: req.body });
+        }
+    }
+
+    // SEARCH
+
+    //[POST] /search/result
+    async result(req, res) {
+        try {
+            const allUser = await User.find({});
+            const user = req.user;
+            if (user.username !== 'admin') {
+                return res.json({ message: 'Tài nguyên chỉ được truy cập bởi admin', user });
+            }
+            res.json({ request: req.body, message: 'Success', user, allUser });
+        } catch (error) {
+            return res.json({ error });
+        }
+    }
 }
 
 module.exports = new ApiController();

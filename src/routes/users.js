@@ -18,7 +18,8 @@ router.post('/handle-form-actions', userController.handleFormActions);
 router.get('/:id/edit', userController.edit);
 router.put('/:id', userController.update);
 router.patch('/:id/restore', userController.restore);
-router.delete('/:id', userController.destroy);
+// router.delete('/:id', userController.destroy);
+router.delete('/:id', userController.forceDestroy);
 router.delete('/:id/force', userController.forceDestroy);
 
 module.exports = router;

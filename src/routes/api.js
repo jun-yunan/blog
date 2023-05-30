@@ -4,6 +4,7 @@ const router = express.Router();
 const apiController = require('../app/controllers/ApiController');
 
 const decodedPasswordMiddleware = require('../app/middleware/decodedPasswordMiddleware');
+const authenticateTokenMiddleware = require('../app/middleware/authenticateTokenMiddleware');
 
 // products
 router.get('/item', apiController.show);
@@ -25,5 +26,11 @@ router.post('/carts/decreaseQuantity', apiController.decreaseQuantity);
 router.post('/carts/increaseQuantity', apiController.increaseQuantity);
 router.post('/carts/deleteProduct', apiController.deleteProduct);
 // router.post('/carts/totalPrice', apiController.totalPrice);
+router.post('/carts/searchProduct', apiController.searchProduct);
 
+// search
+router.post('/search/result', authenticateTokenMiddleware, apiController.result);
+
+//
+router.get('/getAllUser', apiController.getAllUser);
 module.exports = router;

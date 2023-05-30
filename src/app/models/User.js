@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongooseDelete = require('mongoose-delete');
+// const mongooseDelete = require('mongoose-delete');
 
 const Schema = mongoose.Schema;
 
@@ -33,9 +33,9 @@ User.query.sortable = function (req) {
 };
 
 // soft delete
-User.plugin(mongooseDelete, {
-    deletedAt: true,
-    overrideMethods: 'all',
-});
+// User.plugin(mongooseDelete, {
+//     deletedAt: true,
+//     overrideMethods: 'all',
+// });
 
 module.exports = mongoose.model('User', User);
