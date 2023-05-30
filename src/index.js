@@ -7,7 +7,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
-// const SortMiddleware = require('./app/middleware/sortMiddleware');
+const SortMiddleware = require('./app/middleware/sortMiddleware');
 const app = express();
 const route = require('./routes');
 const db = require('./database');
@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
-// app.use(SortMiddleware());
+app.use(SortMiddleware);
 app.use(methodOverride('_method'));
 // app.use(morgan('combined'));
 
