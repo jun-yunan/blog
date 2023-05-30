@@ -1,20 +1,14 @@
-// import handlebars from 'handlebars';
 const path = require('path');
 const express = require('express');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const methodOverride = require('method-override');
 const handlebars = require('express-handlebars').engine;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
-
+// const SortMiddleware = require('./app/middleware/sortMiddleware');
 const app = express();
-
-// const port = process.env.PORT;
-const SortMiddleware = require('./app/middleware/sortMiddleware');
-
 const route = require('./routes');
 const db = require('./database');
 
@@ -22,14 +16,13 @@ const db = require('./database');
 db.connect();
 
 app.use(cors());
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
-app.use(SortMiddleware);
+// app.use(SortMiddleware());
 app.use(methodOverride('_method'));
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 // Template engine
 app.engine(
