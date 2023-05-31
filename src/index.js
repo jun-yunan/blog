@@ -7,7 +7,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
-const SortMiddleware = require('./app/middleware/sortMiddleware');
 const app = express();
 const route = require('./routes');
 const db = require('./database');
@@ -20,7 +19,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
-app.use(SortMiddleware);
 app.use(methodOverride('_method'));
 // app.use(morgan('combined'));
 
@@ -37,5 +35,6 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 
 // route init
 route(app);
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));

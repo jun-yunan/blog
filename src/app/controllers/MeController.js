@@ -1,41 +1,19 @@
 const Course = require('../models/Course');
 const Product = require('../models/Product');
 const User = require('../models/User');
-const { mutipleMongooseToObject } = require('../../util/mongoose');
+const { multipleMongooseToObject } = require('../../util/mongoose');
 
 class MeController {
     // [GET] /me/stored/courses
     storedCourses(req, res, next) {
-        // res.json(res.locals._sort)
-        // Promise.all([Course.find({}).sortable(req), Course.countDocumentsDeleted()])
-        //     .then(([courses, deletedCount]) =>
-        //         res.render('me/stored-courses', {
-        //             deletedCount,
-        //             courses: mutipleMongooseToObject(courses),
-        //         }),
-        //     )
-        //     .catch(next);
-        // -------------------
         Course.find({})
             .sortable(req)
             .then((courses) =>
                 res.render('me/stored-courses', {
-                    courses: mutipleMongooseToObject(courses),
+                    courses: multipleMongooseToObject(courses),
                 }),
             )
             .catch(next);
-
-        // Course.countDocumentsDeleted()
-        //     .then(deletedCount => {
-        //         console.log(deletedCount);
-        //     })
-        //     .catch(() => {})
-
-        // Course.find({})
-        //     .then(courses => res.render('me/stored-courses', {
-        //         courses: mutipleMongooseToObject(courses)
-        //     }))
-        //     .catch(next)
     }
 
     // [GET] /me/trash/courses
@@ -43,7 +21,7 @@ class MeController {
         Course.findDeleted({})
             .then((courses) =>
                 res.render('me/trash-courses', {
-                    courses: mutipleMongooseToObject(courses),
+                    courses: multipleMongooseToObject(courses),
                 }),
             )
             .catch(next);
@@ -53,67 +31,42 @@ class MeController {
         Product.findDeleted({})
             .then((products) =>
                 res.render('me/trash-products', {
-                    products: mutipleMongooseToObject(products),
+                    products: multipleMongooseToObject(products),
                 }),
             )
             .catch(next);
     }
 
+    // [GET] /me/stored/products
     storedProducts(req, res, next) {
-        // await Product.find({})
-        //     .then(products => {
-        //         res.render('me/stored-products', {
-        //             products: mutipleMongooseToObject(products)
-        //         })
-        //     })
-        //     .catch(next)
-
-        // ---------------
-        // Promise.all([Product.find({}).sortable(req), Product.countDocumentsDeleted()])
-        //     .then(([products, deletedCount]) =>
-        //         res.render('me/stored-products', {
-        //             deletedCount,
-        //             products: mutipleMongooseToObject(products),
-        //         }),
-        //     )
-        //     .catch(next);
-
         Product.find({})
             .sortable(req)
             .then((products) =>
                 res.render('me/stored-products', {
-                    // deletedCount,
-                    products: mutipleMongooseToObject(products),
+                    products: multipleMongooseToObject(products),
                 }),
             )
             .catch(next);
     }
 
+    // [GET] /me/stored/users
     storedUsers(req, res, next) {
-        // Promise.all([User.find({}).sortable(req), User.countDocumentsDeleted()])
-        //     .then(([users, deletedCount]) =>
-        //         res.render('me/stored-users', {
-        //             deletedCount,
-        //             users: mutipleMongooseToObject(users),
-        //         }),
-        //     )
-        //     .catch(next);
         User.find({})
             .sortable(req)
             .then((users) =>
                 res.render('me/stored-users', {
-                    // deletedCount,
-                    users: mutipleMongooseToObject(users),
+                    users: multipleMongooseToObject(users),
                 }),
             )
             .catch(next);
     }
 
+    // [GET] /me/trash/users
     trashUser(req, res, next) {
         User.findDeleted({})
             .then((users) =>
                 res.render('me/trash-users', {
-                    users: mutipleMongooseToObject(users),
+                    users: multipleMongooseToObject(users),
                 }),
             )
             .catch(next);

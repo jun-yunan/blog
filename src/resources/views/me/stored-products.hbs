@@ -1,7 +1,7 @@
 <form name="container-form" method="POST" action="/products/handle-form-actions" class="mt-4">
     <div>
         <h3>Sản phẩm của tôi</h3>
-        <a href="/me/trash/products">Thùng rác ({{deletedCount}})</a>
+        {{!-- <a href="/me/trash/products">Thùng rác ({{deletedCount}})</a> --}}
         <div class="mt-4 d-flex align-items-center">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
@@ -24,10 +24,16 @@
         <thead>
             <tr>
                 <th scope="col"></th>
-                <th scope="col">ID{{{sortable '_id' _sort}}}</th>
-                <th scope="col">Tên sản phẩm{{{sortable 'name' _sort}}}</th>
+                <th scope="col">ID
+                    {{!-- {{{sortable '_id' _sort}}} --}}
+                </th>
+                <th scope="col">Tên sản phẩm
+                    {{!-- {{{sortable 'name' _sort}}} --}}
+                </th>
                 <th scope="col">Mô tả</th>
-                <th scope="col">Giá{{{sortable 'createdAt' _sort}}}</th>
+                <th scope="col">Giá
+                    {{!-- {{{sortable 'createdAt' _sort}}} --}}
+                </th>
                 <th scope="col">Hình ảnh</th>
             </tr>
         </thead>
