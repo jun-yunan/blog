@@ -5,7 +5,7 @@ async function connect() {
     try {
         const connect = await mongoose.connect(
             // `mongodb+srv://${process.env.USERNAME_DB}:${process.env.PASSWORD_DB}@cluster0.vtrs6li.mongodb.net/${process.env.NAME_DB}?retryWrites=true&w=majority`,
-            `${process.env.DB}`,
+            `mongodb+srv://jun-yunan:0794210593Zed@cluster0.jy85qob.mongodb.net/WebsiteSales?retryWrites=true&w=majority`,
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
