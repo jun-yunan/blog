@@ -19,16 +19,16 @@ const Product = new Schema(
 );
 
 // Custom query
-Product.query.sortable = function (req) {
-    if (req.query.hasOwnProperty('_sort')) {
-        const inValidType = ['asc', 'desc'].includes(req.query.type);
-        return this.sort({
-            [req.query.column]: inValidType ? req.query.type : 'desc',
-        });
-    }
+// Product.query.sortable = function (req) {
+//     if (req.query.hasOwnProperty('_sort')) {
+//         const inValidType = ['asc', 'desc'].includes(req.query.type);
+//         return this.sort({
+//             [req.query.column]: inValidType ? req.query.type : 'desc',
+//         });
+//     }
 
-    return this;
-};
+//     return this;
+// };
 
 // soft delete
 // Product.plugin(mongooseDelete, {

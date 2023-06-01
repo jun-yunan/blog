@@ -36,6 +36,26 @@ class ApiController {
             });
     }
 
+    async getAll(req, res, next) {
+        try {
+            const products = await Product.find({}).limit(20);
+            if (!products) return;
+
+            return res.json({
+                message: 'Get all products successfully!!!',
+                status: true,
+                products,
+                request: req.query,
+            });
+        } catch (error) {
+            return res.json({ error, message: 'Get all products fail!!!', status: false });
+        }
+    }
+
+    getAllProduct(req, res, next) {
+        res.json({ message: 'success', request: req.query });
+    }
+
     //[GET] /api/products/get
     async get(req, res, next) {
         await Product.find({ type: req.query.typeProduct })
@@ -156,16 +176,16 @@ class ApiController {
                 res.json({
                     status: true,
                     message: 'Tạo tài khoản thành công',
-                    hash,
-                    request: req.body,
-                    result,
+                    // hash,
+                    // request: req.body,
+                    // result,
                 }),
             )
-            .catch((err) => {
+            .catch((error) => {
                 res.json({
                     status: false,
                     message: 'Tạo tài khoản không thành công',
-                    err,
+                    error,
                 });
             });
     }
@@ -428,15 +448,17 @@ class ApiController {
 
     // SEARCH
 
-    //[POST] /search/result
-    async result(req, res) {
+    //[GET] /search
+    async searchResult(req, res, next) {
         try {
             const allUser = await User.find({});
             const user = req.user;
             if (user.username !== 'admin') {
                 return res.json({ message: 'Tài nguyên chỉ được truy cập bởi admin', user });
             }
-            res.json({ request: req.body, message: 'Success', user, allUser });
+            if (!allUser) return;
+
+            return res.json({ message: 'Success', allUser });
         } catch (error) {
             return res.json({ error });
         }

@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const route = require('./routes');
 const db = require('./database');
+// const cacheMiddleware = require('./app/middleware/cacheMiddleware');
 
 // connect to db
 db.connect();
@@ -20,6 +21,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 app.use(methodOverride('_method'));
+// app.use(cacheMiddleware);
 // app.use(morgan('combined'));
 
 // Template engine

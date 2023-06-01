@@ -7,8 +7,11 @@ const decodedPasswordMiddleware = require('../app/middleware/decodedPasswordMidd
 const authenticateTokenMiddleware = require('../app/middleware/authenticateTokenMiddleware');
 
 // products
+router.get('/products', apiController.getAll);
+
 router.get('/item', apiController.show);
 router.get('/getProductAll', apiController.getProductAll);
+router.get('/products/getAll', apiController.getAll);
 router.get('/products/get', apiController.get);
 router.get('/products/getById', apiController.getById);
 
@@ -29,7 +32,7 @@ router.post('/carts/deleteProduct', apiController.deleteProduct);
 router.post('/carts/searchProduct', apiController.searchProduct);
 
 // search
-router.post('/search/result', authenticateTokenMiddleware, apiController.result);
+router.get('/search', authenticateTokenMiddleware, apiController.searchResult);
 
 //
 router.get('/getAllUser', apiController.getAllUser);

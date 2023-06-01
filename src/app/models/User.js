@@ -21,16 +21,16 @@ const User = new Schema(
 );
 
 // Custom query
-User.query.sortable = function (req) {
-    if (req.query.hasOwnProperty('_sort')) {
-        const inValidType = ['asc', 'desc'].includes(req.query.type);
-        return this.sort({
-            [req.query.column]: inValidType ? req.query.type : 'desc',
-        });
-    }
+// User.query.sortable = function (req) {
+//     if (req.query.hasOwnProperty('_sort')) {
+//         const inValidType = ['asc', 'desc'].includes(req.query.type);
+//         return this.sort({
+//             [req.query.column]: inValidType ? req.query.type : 'desc',
+//         });
+//     }
 
-    return this;
-};
+//     return this;
+// };
 
 // soft delete
 // User.plugin(mongooseDelete, {

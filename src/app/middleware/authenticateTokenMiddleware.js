@@ -4,7 +4,7 @@ const secretKey = process.env.SECRETKEY;
 const authenticateTokenMiddleware = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
-    // res.json({ authHeader, token, message: 'Success' });
+    // return res.json({ authHeader, token, message: 'Success' });
     if (token == null) {
         return res.sendStatus(401);
     }

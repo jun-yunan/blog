@@ -7,7 +7,6 @@ class MeController {
     // [GET] /me/stored/courses
     storedCourses(req, res, next) {
         Course.find({})
-            .sortable(req)
             .then((courses) =>
                 res.render('me/stored-courses', {
                     courses: multipleMongooseToObject(courses),
@@ -40,7 +39,6 @@ class MeController {
     // [GET] /me/stored/products
     storedProducts(req, res, next) {
         Product.find({})
-            .sortable(req)
             .then((products) =>
                 res.render('me/stored-products', {
                     products: multipleMongooseToObject(products),
@@ -52,7 +50,6 @@ class MeController {
     // [GET] /me/stored/users
     storedUsers(req, res, next) {
         User.find({})
-            .sortable(req)
             .then((users) =>
                 res.render('me/stored-users', {
                     users: multipleMongooseToObject(users),
