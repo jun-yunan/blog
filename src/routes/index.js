@@ -18,11 +18,7 @@ function route(app) {
 
     app.use('/products', productRouter);
 
-    app.use(
-        '/api',
-        // cacheMiddleware,
-        apiRouter,
-    );
+    app.use('/api', cacheMiddleware, apiRouter);
 
     app.use('/', siteRouter);
 }
