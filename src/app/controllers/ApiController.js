@@ -58,31 +58,36 @@ class ApiController {
 
     //[GET] /api/products/get
     async get(req, res, next) {
-        await Product.find({ type: req.query.typeProduct })
-            .then((products) => {
-                res.json({
-                    query: req.query,
-                    status: 'successfully!!',
-                    data: products,
+        try {
+            const products = await Product.find({ type: req.query.typeProduct });
+            if (!products) {
+                return res.status(404).json({
+                    status: false,
+                    message: 'fail!!!',
+                    error: 'error',
                 });
-            })
-            .catch((err) => {
-                throw err;
+            }
+
+            return res.json({
+                status: true,
+                message: 'successfully!!!',
+                products,
             });
+        } catch (error) {
+            return res.json({ error, status: false, message: 'fail!!' });
+        }
     }
 
     //[GET] /api/products/getById
     async getById(req, res, next) {
-        await Product.findOne({ _id: req.query.idProduct })
-            .then((product) => {
-                res.json({
-                    query: req.query,
-                    status: 'successfully',
-                    data: product,
-                });
-            })
+        try {
+            const product = await Product.findOne({ _id: req.query.idProduct });
+            if (!product) return next();
 
-            .catch(next);
+            return res.json({ message: 'Successfully!!!', status: true, product });
+        } catch (error) {
+            return res.json({ error, message: 'fail!!!', status: false });
+        }
     }
 
     // [GET] /api/users/getAllUser
